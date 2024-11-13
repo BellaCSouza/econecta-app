@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     borderRadius: 30,
     backgroundColor: "#364b56",
-    color: "#fff",
+    color: "#ffff",
   },
 });
 
