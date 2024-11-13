@@ -5,42 +5,41 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function Cadastrar() {
   const navigation = useNavigation();
-  const [nome, setNome] = useState("");
+
+  const [nome_usuario, setNomeUsuario] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [confirmarSenha, setConfirmarSenha] = useState("");
-  const [dataNascimento, setDataNascimento] = useState("");
-  const [telefone, setTelefone] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [cep, setCep] = useState("");
+  const [logradouro, setLogradouro] = useState("");
+  const [numero, setNumero] = useState("");
+  const [complemento, setComplemento] = useState("");
+  const [bairro, setBairro] = useState("");
+  const [cidade, setCidade] = useState("");
+  const [estado, setEstado] = useState("");
+  const [pais, setPais] = useState("");
 
-  // Validação de formulário
+  // Função de validação de formulário
   const validarFormulario = () => {
-    if (!nome || !email || !senha || !confirmarSenha) {
-      Alert.alert("Erro", "Todos os campos obrigatórios precisam ser preenchidos.");
-      return false;
-    }
-    if (senha !== confirmarSenha) {
-      Alert.alert("Erro", "As senhas não coincidem.");
+    if (!nome_usuario || !email || !senha) {
+      Alert.alert("Erro", "Campos obrigatórios não preenchidos!");
       return false;
     }
     return true;
   };
 
-  // Função disparada ao clicar no botão "Confirmar"
+  // Função de cadastro de usuário
   const realizarCadastro = async () => {
     if (!validarFormulario()) return;
 
-    // Montagem do objeto de usuário a ser enviado
-    const usuario = { nome, email, senha, dataNascimento, telefone };
+    const usuario = { nome_usuario, email, senha, cpf, cep, logradouro, numero, complemento, bairro, cidade, estado, pais };
 
     try {
-      // Substitua o IP "192.168.x.x" pelo IP correto do seu servidor Node.js
       const response = await fetch("http://10.0.2.2:3000/register", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify(usuario),
-});
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(usuario),
+      });
 
       const data = await response.json();
 
@@ -70,8 +69,8 @@ export default function Cadastrar() {
               style={styles.input}
               placeholder="Digite seu nome"
               placeholderTextColor="rgba(255, 255, 255, 0.5)"
-              value={nome}
-              onChangeText={setNome}
+              value={nome_usuario}
+              onChangeText={setNomeUsuario}
             />
           </View>
 
@@ -100,37 +99,101 @@ export default function Cadastrar() {
           </View>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.label}>Confirmar Senha</Text>
+            <Text style={styles.label}>CPF</Text>
             <TextInput
               style={styles.input}
-              placeholder="Confirme sua senha"
+              placeholder="Digite seu CPF"
               placeholderTextColor="rgba(255, 255, 255, 0.5)"
-              secureTextEntry
-              value={confirmarSenha}
-              onChangeText={setConfirmarSenha}
+              value={cpf}
+              onChangeText={setCpf}
             />
           </View>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.label}>Data de Nascimento</Text>
+            <Text style={styles.label}>CEP</Text>
             <TextInput
               style={styles.input}
-              placeholder="DD/MM/AAAA"
+              placeholder="Digite seu CEP"
               placeholderTextColor="rgba(255, 255, 255, 0.5)"
-              value={dataNascimento}
-              onChangeText={setDataNascimento}
+              value={cep}
+              onChangeText={setCep}
             />
           </View>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.label}>Telefone</Text>
+            <Text style={styles.label}>Logradouro</Text>
             <TextInput
               style={styles.input}
-              placeholder="(XX) XXXXX-XXXX"
+              placeholder="Digite seu Logradouro"
               placeholderTextColor="rgba(255, 255, 255, 0.5)"
-              keyboardType="phone-pad"
-              value={telefone}
-              onChangeText={setTelefone}
+              value={logradouro}
+              onChangeText={setLogradouro}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Número</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Número"
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
+              value={numero}
+              onChangeText={setNumero}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Complemento</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Complemento"
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
+              value={complemento}
+              onChangeText={setComplemento}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Bairro</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Bairro"
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
+              value={bairro}
+              onChangeText={setBairro}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Cidade</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Cidade"
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
+              value={cidade}
+              onChangeText={setCidade}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Estado</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Estado"
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
+              value={estado}
+              onChangeText={setEstado}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>País</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="País"
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
+              value={pais}
+              onChangeText={setPais}
             />
           </View>
         </View>
@@ -139,7 +202,7 @@ export default function Cadastrar() {
           corBotao="#f28123"
           corTexto="#364b56"
           style={styles.BotaoCustomizado}
-          onPress={realizarCadastro}  // Chamando a função de cadastro ao pressionar o botão
+          onPress={realizarCadastro} // Chamando a função de cadastro ao pressionar o botão
           title="Confirmar"
         />
 
@@ -206,3 +269,4 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
 });
+
