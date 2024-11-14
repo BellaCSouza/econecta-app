@@ -45,7 +45,9 @@ export default function Cadastrar() {
 
       if (response.ok) {
         Alert.alert("Sucesso", "Usuário cadastrado com sucesso!");
-        navigation.navigate("Home");
+        // Após o cadastro bem-sucedido, redireciona para a tela "Conta"
+navigation.navigate("Conta", { email: usuario.email });
+
       } else {
         Alert.alert("Erro", data.error || "Erro ao cadastrar usuário");
       }
@@ -239,6 +241,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     backgroundColor: "#364b56",
     paddingTop: 50,
+    paddingHorizontal:100,
   },
   imagem: {
     width: 150,
@@ -260,13 +263,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   input: {
-    width: "100%",
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#fff",
-    borderRadius: 30,
-    backgroundColor: "#364b56",
-    color: "#ffff",
+    height: 40,
+    borderColor: '#ccc',
+    borderBottomWidth: 2,
+    paddingHorizontal: 10,
+    marginBottom: 30,
+    width: '100%', // O input ocupa toda a largura disponível
   },
 });
 

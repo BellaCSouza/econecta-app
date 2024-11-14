@@ -50,3 +50,13 @@ app.post('/register', (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
+
+app.get('/usuario', (req, res) => {
+  const query = "SELECT * FROM tb_usuario_teste WHERE pk_id_usuario = ?"; // Supondo que você tenha um campo 'id' no banco de dados
+  db.query(query, [userId], (err, result) => { // userId deve ser o id do usuário logado, que pode vir de uma autenticação
+    if (err) {
+      return res.status(500).json({ error: "Erro ao buscar dados do usuário" });
+    }
+    res.status(200).json(result[0]); // Retorna os dados do primeiro usuário encontrado
+  });
+});
